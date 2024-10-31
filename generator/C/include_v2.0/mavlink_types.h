@@ -24,7 +24,8 @@ namespace mavlink {
 #define MAVLINK_MAX_PAYLOAD_LEN 255 ///< Maximum payload length
 #endif
 
-#define MAVLINK_CORE_HEADER_LEN 9 ///< Length of core header (of the comm. layer)
+// add 9 -> 11
+#define MAVLINK_CORE_HEADER_LEN 11 ///< Length of core header (of the comm. layer)
 #define MAVLINK_CORE_HEADER_MAVLINK1_LEN 5 ///< Length of MAVLink1 core header (of the comm. layer)
 #define MAVLINK_NUM_HEADER_BYTES (MAVLINK_CORE_HEADER_LEN + 1) ///< Length of all header bytes, including core and stx
 #define MAVLINK_NUM_CHECKSUM_BYTES 2
@@ -100,7 +101,7 @@ typedef struct param_union_extended {
  */
 MAVPACKED(
 typedef struct __mavlink_system {
-    uint8_t sysid;   ///< Used by the MAVLink message_xx_send() convenience function
+    uint32_t sysid;   ///< Used by the MAVLink message_xx_send() convenience function
     uint8_t compid;  ///< Used by the MAVLink message_xx_send() convenience function
 }) mavlink_system_t;
 
@@ -112,7 +113,7 @@ typedef struct __mavlink_message {
 	uint8_t incompat_flags; ///< flags that must be understood
 	uint8_t compat_flags;   ///< flags that can be ignored if not understood
 	uint8_t seq;            ///< Sequence of packet
-	uint8_t sysid;          ///< ID of message sender system/aircraft
+	uint32_t sysid:24;          ///< ID of message sender system/aircraft
 	uint8_t compid;         ///< ID of the message sender component
 	uint32_t msgid:24;      ///< ID of message in payload
 	uint64_t payload64[(MAVLINK_MAX_PAYLOAD_LEN+MAVLINK_NUM_CHECKSUM_BYTES+7)/8];
@@ -191,7 +192,9 @@ typedef enum {
     MAVLINK_PARSE_STATE_GOT_INCOMPAT_FLAGS,
     MAVLINK_PARSE_STATE_GOT_COMPAT_FLAGS,
     MAVLINK_PARSE_STATE_GOT_SEQ,
-    MAVLINK_PARSE_STATE_GOT_SYSID,
+    MAVLINK_PARSE_STATE_GOT_SYSID1,
+    MAVLINK_PARSE_STATE_GOT_SYSID2,
+    MAVLINK_PARSE_STATE_GOT_SYSID3,
     MAVLINK_PARSE_STATE_GOT_COMPID,
     MAVLINK_PARSE_STATE_GOT_MSGID1,
     MAVLINK_PARSE_STATE_GOT_MSGID2,
@@ -275,7 +278,7 @@ typedef struct __mavlink_signing_streams {
     uint16_t num_signing_streams;
     struct __mavlink_signing_stream {
         uint8_t link_id;              ///< ID of the link (MAVLINK_CHANNEL)
-        uint8_t sysid;                ///< Remote system ID
+        uint32_t sysid;                ///< Remote system ID
         uint8_t compid;               ///< Remote component ID
         uint8_t timestamp_bytes[6];   ///< Timestamp, in microseconds since UNIX epoch GMT
     } stream[MAVLINK_MAX_SIGNING_STREAMS];
