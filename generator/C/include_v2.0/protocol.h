@@ -2,7 +2,7 @@
 
 #include "string.h"
 #include "mavlink_types.h"
-
+#include "assert.h"
 /* 
    If you want MAVLink on a system that is native big-endian,
    you need to define NATIVE_BIG_ENDIAN
@@ -22,7 +22,7 @@
 #endif
 
 #ifndef MAVLINK_ASSERT
-#define MAVLINK_ASSERT(x)
+#define MAVLINK_ASSERT(x) assert(x)
 #endif
 
 #ifndef MAVLINK_START_UART_SEND
