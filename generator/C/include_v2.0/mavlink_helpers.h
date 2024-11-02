@@ -475,11 +475,11 @@ MAVLINK_HELPER uint16_t mavlink_msg_to_send_buffer(uint8_t *buf, const mavlink_m
 		buf[0] = msg->magic;
 		buf[1] = length;
         buf[2] = (length >> 8) & 0xFF;
-		buf[2] = msg->incompat_flags;
-		buf[3] = msg->compat_flags;
-		buf[4] = msg->seq;
-		buf[5] = msg->sysid & 0xFF;
-        buf[6] = (msg->sysid >> 8) & 0xFF;
+		buf[3] = msg->incompat_flags;
+		buf[4] = msg->compat_flags;
+		buf[5] = msg->seq;
+		buf[6] = msg->sysid & 0xFF;
+        buf[7] = (msg->sysid >> 8) & 0xFF;
 		buf[8] = msg->compid;
 		buf[9] = msg->msgid & 0xFF;
 		buf[10] = (msg->msgid >> 8) & 0xFF;

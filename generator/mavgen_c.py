@@ -473,6 +473,8 @@ def generate_testsuite_h(directory, xml):
 #ifndef ${basename_upper}_TESTSUITE_H
 #define ${basename_upper}_TESTSUITE_H
 
+#include "${basename}.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -491,6 +493,8 @@ ${{include_list:    mavlink_test_${base}(system_id, component_id, last_msg);
 }
 #endif
 
+
+
 ${{include_list:#include "../${base}/testsuite.h"
 }}
 
@@ -503,7 +507,7 @@ static void mavlink_test_${name_lower}(uint16_t system_id, uint8_t component_id,
             return;
         }
 #endif
-    printf("----${name_lower} test begin----\\n");
+//    printf("----${name_lower} test begin----\\n");
 
     mavlink_message_t msg;
         uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
@@ -556,7 +560,7 @@ static void mavlink_test_${name_lower}(uint16_t system_id, uint8_t component_id,
     MAVLINK_ASSERT(mavlink_get_message_info_by_id(MAVLINK_MSG_ID_${name}) != NULL);
 #endif
             
-    printf("****${name_lower} test end****\\n");
+//    printf("****${name_lower} test end****\\n");
 }
 }}
 
