@@ -43,15 +43,15 @@
     MAVLINK_HELPER mavlink_status_t* mavlink_get_channel_status(uint8_t chan);
     #endif
     MAVLINK_HELPER void mavlink_reset_channel_status(uint8_t chan);
-    MAVLINK_HELPER uint16_t mavlink_finalize_message_buffer(mavlink_message_t* msg, uint32_t system_id, uint8_t component_id,
-                                                            mavlink_status_t* status, uint8_t min_length, uint8_t length, uint8_t crc_extra);
-    MAVLINK_HELPER uint16_t mavlink_finalize_message_chan(mavlink_message_t* msg, uint32_t system_id, uint8_t component_id,
-                                                          uint8_t chan, uint8_t min_length, uint8_t length, uint8_t crc_extra);
-    MAVLINK_HELPER uint16_t mavlink_finalize_message(mavlink_message_t* msg, uint32_t system_id, uint8_t component_id,
-                                                     uint8_t min_length, uint8_t length, uint8_t crc_extra);
+    MAVLINK_HELPER uint16_t mavlink_finalize_message_buffer(mavlink_message_t* msg, uint16_t system_id, uint8_t component_id,
+                                                            mavlink_status_t* status, uint16_t min_length, uint16_t length, uint8_t crc_extra);
+    MAVLINK_HELPER uint16_t mavlink_finalize_message_chan(mavlink_message_t* msg, uint16_t system_id, uint8_t component_id,
+                                                          uint8_t chan, uint16_t min_length, uint16_t length, uint8_t crc_extra);
+    MAVLINK_HELPER uint16_t mavlink_finalize_message(mavlink_message_t* msg, uint16_t system_id, uint8_t component_id,
+                                                     uint16_t min_length, uint16_t length, uint8_t crc_extra);
     #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
-    MAVLINK_HELPER void _mav_finalize_message_chan_send(mavlink_channel_t chan, uint32_t msgid, const char *packet,
-                                                        uint8_t min_length, uint8_t length, uint8_t crc_extra);
+    MAVLINK_HELPER void _mav_finalize_message_chan_send(mavlink_channel_t chan, uint16_t msgid, const char *packet,
+                                                        uint16_t min_length, uint16_t length, uint8_t crc_extra);
     #endif
     MAVLINK_HELPER uint16_t mavlink_msg_to_send_buffer(uint8_t *buffer, const mavlink_message_t *msg);
     MAVLINK_HELPER void mavlink_start_checksum(mavlink_message_t* msg);
@@ -65,7 +65,7 @@
     MAVLINK_HELPER uint8_t mavlink_parse_char(uint8_t chan, uint8_t c, mavlink_message_t* r_message, mavlink_status_t* r_mavlink_status);
     MAVLINK_HELPER uint8_t put_bitfield_n_by_index(int32_t b, uint8_t bits, uint8_t packet_index, uint8_t bit_index,
                                uint8_t* r_bit_index, uint8_t* buffer);
-    MAVLINK_HELPER const mavlink_msg_entry_t *mavlink_get_msg_entry(uint32_t msgid);
+    MAVLINK_HELPER const mavlink_msg_entry_t *mavlink_get_msg_entry(uint16_t msgid);
     #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
     MAVLINK_HELPER void _mavlink_send_uart(mavlink_channel_t chan, const char *buf, uint16_t len);
     MAVLINK_HELPER void _mavlink_resend_uart(mavlink_channel_t chan, const mavlink_message_t *msg);
