@@ -34,6 +34,7 @@ namespace mavlink {
 
 #define MAVLINK_SIGNATURE_BLOCK_LEN 13
 
+// printf -> 289
 #define MAVLINK_MAX_PACKET_LEN (MAVLINK_MAX_PAYLOAD_LEN + MAVLINK_NUM_NON_PAYLOAD_BYTES + MAVLINK_SIGNATURE_BLOCK_LEN) ///< Maximum packet length
 
 /**
