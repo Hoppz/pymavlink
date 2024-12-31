@@ -226,7 +226,7 @@ typedef struct __mavlink_status {
     uint8_t buffer_overrun;             ///< Number of buffer overruns
     uint8_t parse_error;                ///< Number of parse errors
     mavlink_parse_state_t parse_state;  ///< Parsing state machine
-    uint8_t packet_idx;                 ///< Index in current packet
+    uint16_t packet_idx;                 ///< Index in current packet
     uint8_t current_rx_seq;             ///< Sequence number of last packet received
     uint8_t current_tx_seq;             ///< Sequence number of last packet sent
     uint16_t packet_rx_success_count;   ///< Received packets
