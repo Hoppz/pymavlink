@@ -240,6 +240,16 @@ _MAV_PUT_ARRAY(double,   d)
 #define _MAV_RETURN_int8_t(msg, wire_offset)   (int8_t)_MAV_PAYLOAD(msg)[wire_offset]
 #define _MAV_RETURN_uint8_t(msg, wire_offset) (uint8_t)_MAV_PAYLOAD(msg)[wire_offset]
 
+// hoppz add
+// #define _MAV_RETURN_int16_t(msg, wire_offset) (*((int16_t *)(&_MAV_PAYLOAD(msg)[wire_offset])))
+
+static inline int16_t hop_mav_return_int16_t(const mavlink_message_t *msg, uint8_t ofs) {
+    int16_t value;
+    memcpy(&value, &_MAV_PAYLOAD(msg)[ofs], sizeof(int16_t));
+    return value;
+}
+// hoppz add
+
 #if MAVLINK_NEED_BYTE_SWAP
 #define _MAV_MSG_RETURN_TYPE(TYPE, SIZE) \
 static inline TYPE _MAV_RETURN_## TYPE(const mavlink_message_t *msg, uint8_t ofs) \
